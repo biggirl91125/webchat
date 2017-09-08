@@ -1,0 +1,15 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node pack"
+  },
+  "dependencies": {
+    "express": "3.0.6",
+    "jade": "*"
+  },
+  "devDependencies": {
+    "node-webkit-builder": "^1.0.12"
+  }
+}

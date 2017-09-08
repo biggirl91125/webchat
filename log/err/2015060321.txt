@@ -1,0 +1,19 @@
+[2015-06-03 21:10:33.904] [ERROR] logErr - { [Error: connect ETIMEDOUT]
+  code: 'ETIMEDOUT',
+  errno: 'ETIMEDOUT',
+  syscall: 'connect',
+  fatal: true }
+Error: connect ETIMEDOUT
+    at exports._errnoException (util.js:746:11)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:983:19)
+    --------------------
+    at Protocol._enqueue (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\Protocol.js:110:48)
+    at Protocol.handshake (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\Protocol.js:42:41)
+    at Connection.connect (D:\nodejs\webchat_common\node_modules\mysql\lib\Connection.js:99:18)
+    at Object.<anonymous> (D:\nodejs\webchat_common\app.js:21:12)
+    at Module._compile (module.js:460:26)
+    at Object.Module._extensions..js (module.js:478:10)
+    at Module.load (module.js:355:32)
+    at Function.Module._load (module.js:310:12)
+    at Function.Module.runMain (module.js:501:10)
+    at startup (node.js:129:16)

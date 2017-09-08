@@ -1,0 +1,119 @@
+Ext.define('Wechat.Control.StoreControl',{	
+	
+	allStaff : null,
+	existStaff:null ,
+
+	constructor : function(config) {	
+		
+		this.groupsGridStore=Ext.create('Wechat.Store.GroupsGridStore');
+		Wechat.obEvent.on("returnGroups",this.getgroupsStore,this);
+
+		this.dragGridStore=Ext.create('Wechat.Store.DragGridStore');
+		Wechat.obEvent.on("returnPersons",this.getPersonsStore,this);
+
+		this.membersGridStore=Ext.create('Wechat.Store.MembersGridStore');
+		Wechat.obEvent.on('returnExistMembers',this.existMembers,this);//已存在的群组成员（自己定义）
+
+		this.teamsStore=Ext.create('Wechat.Store.TeamsStore');//班组
+		Wechat.obEvent.on('returnGrps',this.getCorps,this);
+
+		Wechat.obEvent.on('time',this.time,this);//保证先执行returnPersons事件，再执行returnExistMembers事件
+
+	},
+	
+	reLoad:function(store,condition){
+		
+		store.proxy.extraParams = condition;                   
+	
+		store.reload();	
+		
+	},
+
+	
+	initLoad:function(store){
+		
+		store.load();
+		
+	},
+	
+	getgroupsStore:function(data)
+	{
+		console.info(data);
+		
+		if(data)
+		{
+			this.groupsGridStore.loadData(data);
+		}
+	},
+	
+	getPersonsStore:function(data)
+	{
+		console.info(data);
+		this.allStaff=data;
+		console.info(this.allStaff);
+		if(data)
+		{
+			var array=[];
+			for(i in data)
+			{
+				var record={};
+				record.employee_id=data[i].Employee_ID;
+				record.chinese_name=data[i].short_employee_id;
+				record.role_key=data[i].Role_Key;	
+				record.team=data[i].Group_Name;
+				array.push(record);
+			}
+			//console.info(array);
+			this.dragGridStore.loadData(array);
+			Wechat.obEvent.fireEvent('time');
+		}
+
+	},
+	time:function()
+	{
+		if(this.existStaff)
+		{
+			console.info(this.allStaff);
+			console.info(this.existStaff);
+			for(i in this.existStaff)
+			{
+				var index=this.dragGridStore.find("employee_id",this.existStaff[i].employee_id);
+				this.existStaff[i].team=this.dragGridStore.getAt(index).get("team");
+			}
+			this.membersGridStore.loadData(this.existStaff);
+			this.existStaff=null;
+		}
+		
+	},
+
+	existMembers:function(data)
+	{
+		console.info(data);
+		this.existStaff=data;
+		/*console.info(this.allStaff);
+		if(data)
+		{
+			this.membersGridStore.loadData(data);
+		}*/
+	},
+	
+	getCorps:function(data)
+	{
+		console.info(data);
+		if(data)
+		{
+			var array=[];
+			for(i in data)
+			{
+				var record={};
+				record.teamdisplay=data[i].Group_Name;
+				record.teamvalue=data[i].Group_Name;
+				array.push(record);
+			}
+			this.teamsStore.loadData(array);
+			console.info(this.teamsStore);
+		}
+	}
+	
+	
+});

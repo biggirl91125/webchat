@@ -1,0 +1,27 @@
+[2015-05-25 10:59:43.767] [ERROR] logErr - { [Error: ER_BAD_FIELD_ERROR: Unknown column 'project' in 'field list']
+  code: 'ER_BAD_FIELD_ERROR',
+  errno: 1054,
+  sqlState: '42S22',
+  index: 0 }
+Error: ER_BAD_FIELD_ERROR: Unknown column 'project' in 'field list'
+    at Query.Sequence._packetToError (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\sequences\Sequence.js:30:14)
+    at Query.ErrorPacket (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\sequences\Query.js:82:18)
+    at Protocol._parsePacket (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\Protocol.js:205:24)
+    at Parser.write (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\Parser.js:62:12)
+    at Protocol.write (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\Protocol.js:37:16)
+    at Socket.<anonymous> (D:\nodejs\webchat_common\node_modules\mysql\lib\Connection.js:73:28)
+    at Socket.emit (events.js:107:17)
+    at readableAddChunk (_stream_readable.js:163:16)
+    at Socket.Readable.push (_stream_readable.js:126:10)
+    at TCP.onread (net.js:529:20)
+    --------------------
+    at Protocol._enqueue (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\Protocol.js:110:48)
+    at Connection.query (D:\nodejs\webchat_common\node_modules\mysql\lib\Connection.js:166:25)
+    at groupList.saveMod (D:\nodejs\webchat_common\models\groupList.js:196:18)
+    at groupList.modifyGroup (D:\nodejs\webchat_common\models\groupList.js:60:8)
+    at Function.editGroupHandler (D:\nodejs\webchat_common\models\listenHandler.js:532:47)
+    at Socket.<anonymous> (D:\nodejs\webchat_common\app.js:124:17)
+    at Socket.emit [as $emit] (events.js:107:17)
+    at SocketNamespace.handlePacket (D:\nodejs\webchat_common\node_modules\socket.io\lib\namespace.js:335:22)
+    at Manager.onClientMessage (D:\nodejs\webchat_common\node_modules\socket.io\lib\manager.js:488:38)
+    at WebSocket.Transport.onMessage (D:\nodejs\webchat_common\node_modules\socket.io\lib\transport.js:387:20)

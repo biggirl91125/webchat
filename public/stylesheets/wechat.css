@@ -1,0 +1,18 @@
+.delete_node {
+	background-image: url(/images/deletenode.png) ;
+	background-repeat: no-repeat;   
+	background-position: center; 
+}
+
+
+.modify_node {
+	background-image: url(/images/modifynode.png);
+	background-repeat: no-repeat;   
+	background-position: center; 
+}
+
+.add_node {
+	background-image: url(/images/addnode.png);
+	background-repeat: no-repeat;   
+	background-position: center; 
+}

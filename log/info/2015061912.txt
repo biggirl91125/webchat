@@ -1,0 +1,12 @@
+[2015-06-19 12:02:16.232] [DEBUG] logInfo - GET /
+[2015-06-19 12:02:16.347] [DEBUG] logInfo - GET /public/javascripts/extjs/ext-all.js
+[2015-06-19 12:02:16.351] [DEBUG] logInfo - GET /public/javascripts/chat.js
+[2015-06-19 12:03:26.209] [DEBUG] logInfo - GET /
+[2015-06-19 12:03:26.227] [DEBUG] logInfo - GET /public/javascripts/extjs/ext-all.js
+[2015-06-19 12:03:26.229] [DEBUG] logInfo - GET /public/javascripts/chat.js
+[2015-06-19 12:03:27.512] [DEBUG] logInfo - GET /
+[2015-06-19 12:03:27.541] [DEBUG] logInfo - GET /public/javascripts/extjs/ext-all.js
+[2015-06-19 12:03:27.543] [DEBUG] logInfo - GET /public/javascripts/chat.js
+[2015-06-19 12:03:43.098] [DEBUG] logInfo - GET /
+[2015-06-19 12:03:43.127] [DEBUG] logInfo - GET /public/javascripts/extjs/ext-all.js
+[2015-06-19 12:03:43.132] [DEBUG] logInfo - GET /public/javascripts/chat.js

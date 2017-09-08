@@ -1,0 +1,13 @@
+[2015-05-20 11:54:00.121] [DEBUG] logInfo - GET /test
+[2015-05-20 11:54:00.557] [DEBUG] logInfo - GET /javascripts/logic.js
+[2015-05-20 11:54:01.078] [DEBUG] logInfo - GET /javascripts/session.js
+[2015-05-20 11:54:01.080] [DEBUG] logInfo - GET /javascripts/view.js
+[2015-05-20 11:54:01.080] [DEBUG] logInfo - GET /javascripts/msgstore.js
+[2015-05-20 11:54:01.439] [DEBUG] logInfo - GET /javascripts/extjs/ext-all.js
+[2015-05-20 11:54:04.934] [DEBUG] logInfo - GET /favicon.ico
+[2015-05-20 11:54:17.524] [DEBUG] logInfo - GET /test
+[2015-05-20 11:54:17.594] [DEBUG] logInfo - GET /javascripts/extjs/ext-all.js
+[2015-05-20 11:54:17.602] [DEBUG] logInfo - GET /javascripts/logic.js
+[2015-05-20 11:54:17.606] [DEBUG] logInfo - GET /javascripts/view.js
+[2015-05-20 11:54:17.610] [DEBUG] logInfo - GET /javascripts/msgstore.js
+[2015-05-20 11:54:17.616] [DEBUG] logInfo - GET /javascripts/session.js

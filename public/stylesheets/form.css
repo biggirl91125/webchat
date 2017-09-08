@@ -1,0 +1,31 @@
+body{
+	color:#000;
+	background-color:#9D9D9D;
+}
+input .invalid{
+	background-color:#FF9;
+	border:2px red inset;
+}
+label .invalid{
+	color:#F00;
+	font-weight:bold;
+}
+#form{
+	width:600px;
+	height:350px;
+	position:absolute;
+	left:500px;
+	top:150px;
+}
+select {
+	margin-left:80px;
+}
+input{
+	margin-left:30px;
+}
+input+select,input+input{
+	margin-left:20px;
+}
+.centered{
+	text-align:center;
+}

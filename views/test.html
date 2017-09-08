@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	    <title>用户登录</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">		 
+		<script type='text/javascript' src='/javascripts/extjs/ext-all.js'></script>
+		<script type='text/javascript' src='/socket.io/socket.io.js'></script>
+		<script type='text/javascript' src='/javascripts/logic.js'></script>
+		<script type='text/javascript' src='/javascripts/view.js'></script>
+		<script type='text/javascript' src='/javascripts/msgstore.js'></script>
+		<script type='text/javascript' src='/javascripts/session.js'></script>  	    
+</head>
+<body>
+<table>
+<form name="login">
+<tr><td>用户工号：<input type="text" id="empId"></td></tr> 
+<tr><td>密码：<input type="password" id="password"></center></tr> 
+<tr><td>企业名：<input type="text" id="corpId"></center></tr>
+<tr><td>
+<label><input type="radio" name="roleKey" id="roleKey" value="ROLE_CRM_ADMIN" checked="true">坐席</label> 
+<label><input type="radio" name="roleKey" id="roleKey" value="ROLE_CRM_CHECKER">质检</label> 
+<label><input type="radio" name="roleKey" id="roleKey" value="ROLE_CRM_MONITOR">班长</label> 
+<label><input type="radio" name="roleKey" id="roleKey" value="ROLE_CRM_CORP_MANAGE_ADMIN">企业管理员</label>
+<label><input type="radio" name="roleKey" id="roleKey" value="ROLE_CRM_DEPT_ADMIN">部门管理员</label>
+</td></tr>
+<tr><td><a href='#' id='consult'>顾客咨询&gt;&gt;</a></td></tr>
+</form>
+</table> 
+<table>
+<tr><td><button type="button" id="login">登录</button></td><td id="userinfo"></td></tr> 
+<tr><td><button type="button" id="depts">企业结构</button></td><td id="deptList"></td></tr>
+<tr><td><button type="button" id="users">用户列表</button></td><td id="userList"></td></tr>
+<tr><td><button type="button" id="groups">群组列表</button></td><td id="group_com"></td><td id="group_oth"></td></tr>
+<tr><td><button type="button" id="cons">通话列表</button></td><td id="convers"></td><td id="convers_gro"></td></tr>
+<tr><td><button type="button" id="msg">发送私信消息</button></td><td><input type="text" id="t1"></td></tr>
+<tr><td><button type="button" id="guestMsg">顾客发送消息</button></td><td><input type="text" id="tt"></td></tr>
+<tr><td><button type="button" id="gueMsg">顾客接收消息</button></td><td id='pp'></td></tr>
+<tr><td><button type="button" id="recmsg">接收私信消息</button></td><td id="recMsg"></td></tr>
+<tr><td><button type="button" id="groupmsg">发送群组消息</button></td><td><input type="text" id="t2"></td></tr>
+<tr><td><button type="button" id="recgroupmsg">接收群组消息</button></td><td id="recGroupMsg"></td></tr>
+<tr><td><button type="button" id="unreadmsg">请求未读消息</button></td><td id="unread_per"></td><td id="unread_gro"></td></tr>
+<tr><td><button type="button" id="open">打开窗口</button></td></tr> 
+<tr><td><button type="button" id="close">关闭窗口</button></td></tr>
+<tr><td><button type="button" id="delCon">关闭grid</button></td></tr>
+<tr><td><button type="button" id="open_gro">打开群组窗口</button></td></tr> 
+<tr><td><button type="button" id="close_gro">关闭群组窗口</button></td></tr>
+<tr><td><button type="button" id="history">历史记录</button></td></tr>
+<tr><td><button type="button" id="upload">文件传送</button></td><td><form method='post' action='/upload' id='form'><input type='file' id= 'fileId' name='fileId'></form></td><td id="recFile"></td></tr>
+<tr><td><button type="button" id="addGroup">创建群组</button></td><td id="newG"></td></tr>
+<tr><td><button type="button" id="delGroup">删除群组</button></td><td id="deleted"></td></tr>
+<tr><td><button type="button" id="editGroup">修改群组</button></td><td id="updated"></td></tr>
+<tr><td><button type="button" id="addMember">添加群成员</button></td><td id="addM"></td></tr>
+<tr><td><button type="button" id="delMember">删除群成员</button></td><td id="delM"></td></tr>
+<tr><td><button type="button" id="logout">登出</button></td><td id="exit"></td></tr>
+</table>
+</body>
+</html>
+<script language="javascript">
+Ext.onReady(function(){ 
+	//初始化消息队列
+	var msg=new Ext.util.Observable(); 
+	//初始化视图
+	var view=new View(msg);
+	 
+	document.getElementById('login').onclick=login;
+	document.getElementById('depts').onclick=returnGrps;
+	document.getElementById('users').onclick=returnUsers;
+	document.getElementById('groups').onclick=returnGroups;
+	document.getElementById('cons').onclick=returnCons;
+	document.getElementById('msg').onclick=send;
+	document.getElementById('groupmsg').onclick=sendG;
+	document.getElementById('unreadmsg').onclick=unread;
+	document.getElementById('open').onclick=winOpen;
+	document.getElementById('close').onclick=winClose;
+	document.getElementById('open_gro').onclick=winOpen_gro;
+	document.getElementById('close_gro').onclick=winClose_gro;
+	document.getElementById('history').onclick=getHist;
+	document.getElementById('upload').onclick=upload;
+	document.getElementById('addGroup').onclick=addGroup;
+	document.getElementById('delGroup').onclick=delGroup;
+	document.getElementById('editGroup').onclick=editGroup;
+	document.getElementById('addMember').onclick=addMember;
+	document.getElementById('delMember').onclick=delMember;
+	document.getElementById('logout').onclick=exit;
+	document.getElementById('consult').onclick=consult;
+	document.getElementById('guestMsg').onclick=consulting;
+	document.getElementById('delCon').onclick=delCon;
+	 
+	 
+		
+		
+	function login(){
+		var empId=document.login.empId.value;
+		var corpId=document.login.corpId.value;
+		var password=document.login.password.value;
+		var roleKey;
+		var obj=document.login.roleKey;
+		for(var i=0;i<obj.length;i++)
+		{
+			if(obj[i].checked)
+				roleKey=obj[i].value;
+		}
+		var empid='000010'+corpId+empId;
+		
+		var se=new session(msg);
+		var store=new MsgStore(msg,empid);
+		console.log(corpId);
+		var logic=new Logic(msg,corpId,roleKey,empid,password);
+		msg.fireEvent('login_admin');
+	}
+	function returnGrps(){
+		msg.fireEvent('grpsCorp');
+	}
+	function returnUsers(){
+		msg.fireEvent('members');
+		//msg.fireEvent('persons');
+	}
+	function returnGroups(){
+		msg.fireEvent('grps');
+	}
+	function returnCons(){
+		msg.fireEvent('localConversations');
+	}
+	function send(){
+		var cont=document.getElementById("t1").value;
+		empid='000010'+corpId+empId;
+		var send='2001';
+		var rece='0000109000002003';
+		var name='2003';
+		/*
+		if(empid=='0000109000002001'){
+			send='2001';
+			rece='0000109000002002';
+			name='2002';
+		}
+		else{
+			send='2002';
+			rece='0000109000002001';
+			name='2001';
+		}
+		*/
+		
+		msg.fireEvent('sendMsg',send,rece,name,cont);
+	}
+	function consulting(){
+		var cont=document.getElementById('tt').value;
+		msg.fireEvent('sendMsg_guest',cont);
+	}
+	function sendG(){
+		empid='000010'+corpId+empId;
+		var cont=document.getElementById("t2").value;
+		var gro="Agents";
+		var ti='2014-11-26';
+		var type=0;
+		var send;
+		if(empid=='0000109000002001')send='2001';
+		else send='2002';
+		msg.fireEvent('sendGroupMsg',send,gro,type,cont,ti);
+	}
+	function unread(){
+		msg.fireEvent('unreadMsg');
+	}
+	function winOpen(){
+		console.log(empId);
+		console.log(corpId);
+		empid='000010'+corpId+empId;
+		console.log(empid);
+		if(empid=='0000109000002001'){
+			var id='0000109000002002';
+			msg.fireEvent('winOpen',id);
+		}
+		else{
+			var id='0000109000002001';
+			msg.fireEvent('winOpen',id);
+		}
+		
+	}
+	function winClose(){
+		var id='0000109000002001';
+		msg.fireEvent('winClose',id);
+	}
+	function winOpen_gro(){
+		var id='Agents';
+		msg.fireEvent('winOpen',id);
+	}
+	function winClose_gro(){
+		var id='Agents';
+		msg.fireEvent('winClose',id);
+	}
+	function getHist(){
+		empid='000010'+corpId+empId;
+		console.log(empid);
+		var id='0000109000002001';
+		//if(empid='0000109000002001')
+			//id='0000109000002002';
+		//else id='0000109000002001';
+		console.log(id);
+		var num=0;
+		var index=2;
+		msg.fireEvent('getSession',id,num,index);
+	}
+	function upload(){
+		var files=document.getElementById('fileId').files;
+		var fileName=files[0].name;
+		var fileId='0000109000002002';
+		var send_name='2001';
+		document.getElementById('form').submit();
+		msg.fireEvent('sendFile',send_name,fileId,fileName);
+		return false;
+	}
+	 /*
+	function addGroup(){
+		var groupName='webchat';
+		var groupType=1;
+		var members='0000109000002001,0000109000002004,0000109000002006';
+		var chairs='0000109000002004';
+		var names='2001,2004,2006';
+		msg.fireEvent('addGroup',groupName,groupType,members,chairs,names);
+	}
+	*/
+	/*
+	function addGroup(){
+		var groupName='product';
+		var groupType=0;
+		var members='0000109000002001,0000109000003004,0000109000003008';
+		var chairs='0000109000003004';
+		var names='2001,3004,3008';
+		msg.fireEvent('addGroup',groupName,groupType,members,chairs,names);
+	}
+	*/
+	function addGroup(){
+		var groupName='项目通告';
+		var groupType=1;
+		var members='000010111111111666,000010111111123453,000010111111123454,000010111111123789';
+		var chairs='000010111111123454';
+		var names='111666,123453,123454,123789';
+		var data={'groupName':groupName,'groupType':groupType,'Members':members,'chairMen':chairs,'names':names};
+		msg.fireEvent('addGroup',data);
+	}
+	function delGroup(){
+		var groupName='2015';
+		 
+		msg.fireEvent('delGroup',groupName);
+	}
+	function editGroup(){
+		var groupName='项目管理组';
+		var newGrpName='任务管理组';
+		var groupType=0;
+		var members='000010111111111666,000010111111123454,000010111111123789';
+		var chairs='000010111111111666';
+		var names='111666,123454,123789';
+		var data={'groupName':groupName,'groupType':groupType,'Members':members,'chairMen':chairs,'names':names,'newGrpName':newGrpName};
+		msg.fireEvent('editGroup',data);
+	}
+	function addMember(){
+		var groupName='webchat';
+		var groupType=1;
+		var empId='0000109000003007';
+		var name='3007';
+		var flag=false;
+		msg.fireEvent('addMember',groupName,groupType,empId,name,flag);
+	}
+	function delMember(){
+		var groupName='webchat';
+		var groupType=1;
+		var empId='0000109000003007';
+		var name='3007';
+		var flag=false;
+		msg.fireEvent('delMember',groupName,groupType,empId,name,flag);
+	}
+	function exit(){
+		msg.fireEvent('logout');
+	}
+	function consult(){
+		var roleKey='GUEST';
+		var corpId='100998';
+		var se=new session(msg);
+		//var store=new MsgStore(msg,roleKey);
+		var ip=window.location.host; 
+		var IP=ip.split(':');
+		console.log(IP[0]);
+		var logic=new Logic(msg,corpId,roleKey,IP[0]); 
+		msg.fireEvent('login');
+		return false;
+	}
+	
+	function delCon(){
+		var id='0000109000002001';
+		msg.fireEvent('delConversation',id);
+	}
+ 
+});
+</script>
+ 

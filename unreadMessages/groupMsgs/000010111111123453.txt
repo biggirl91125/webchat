@@ -1,0 +1,1 @@
+[{"corpId":"111111","groupName":"项目通告","groupType":0,"chairMen":"000010111111123454","sender":"000010111111123454","sender_name":"123454","time":"2015/6/10 11:25:17","content":"hello"}]

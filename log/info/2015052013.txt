@@ -1,0 +1,6 @@
+[2015-05-20 13:58:31.956] [DEBUG] logInfo - GET /test
+[2015-05-20 13:58:32.014] [DEBUG] logInfo - GET /javascripts/extjs/ext-all.js
+[2015-05-20 13:58:32.024] [DEBUG] logInfo - GET /javascripts/view.js
+[2015-05-20 13:58:32.028] [DEBUG] logInfo - GET /javascripts/msgstore.js
+[2015-05-20 13:58:32.037] [DEBUG] logInfo - GET /javascripts/session.js
+[2015-05-20 13:58:33.121] [DEBUG] logInfo - GET /javascripts/logic.js

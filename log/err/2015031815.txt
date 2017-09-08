@@ -1,0 +1,27 @@
+[2015-03-18 15:02:01.255] [ERROR] logErr - { [Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0000109000002001','2001','ddd',now())' at line 1]
+  code: 'ER_PARSE_ERROR',
+  errno: 1064,
+  sqlState: '42000',
+  index: 0 }
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '0000109000002001','2001','ddd',now())' at line 1
+    at Query.Sequence._packetToError (/home/wuweida/node-v0.12.0-linux-x64/webapps/webchat/node_modules/mysql/lib/protocol/sequences/Sequence.js:30:14)
+    at Query.ErrorPacket (/home/wuweida/node-v0.12.0-linux-x64/webapps/webchat/node_modules/mysql/lib/protocol/sequences/Query.js:82:18)
+    at Protocol._parsePacket (/home/wuweida/node-v0.12.0-linux-x64/webapps/webchat/node_modules/mysql/lib/protocol/Protocol.js:205:24)
+    at Parser.write (/home/wuweida/node-v0.12.0-linux-x64/webapps/webchat/node_modules/mysql/lib/protocol/Parser.js:62:12)
+    at Protocol.write (/home/wuweida/node-v0.12.0-linux-x64/webapps/webchat/node_modules/mysql/lib/protocol/Protocol.js:37:16)
+    at Socket.<anonymous> (/home/wuweida/node-v0.12.0-linux-x64/webapps/webchat/node_modules/mysql/lib/Connection.js:73:28)
+    at Socket.emit (events.js:107:17)
+    at readableAddChunk (_stream_readable.js:163:16)
+    at Socket.Readable.push (_stream_readable.js:126:10)
+    at TCP.onread (net.js:529:20)
+    --------------------
+    at Protocol._enqueue (/home/wuweida/node-v0.12.0-linux-x64/webapps/webchat/node_modules/mysql/lib/protocol/Protocol.js:110:48)
+    at Connection.query (/home/wuweida/node-v0.12.0-linux-x64/webapps/webchat/node_modules/mysql/lib/Connection.js:166:25)
+    at groupMessage.save (/home/wuweida/node-v0.12.0-linux-x64/webapps/webchat/models/groupmessages.js:15:13)
+    at Function.groupMessageHandler (/home/wuweida/node-v0.12.0-linux-x64/webapps/webchat/models/listenHandler.js:251:15)
+    at Socket.<anonymous> (/home/wuweida/node-v0.12.0-linux-x64/webapps/webchat/app.js:95:17)
+    at Socket.emit [as $emit] (events.js:107:17)
+    at SocketNamespace.handlePacket (/home/wuweida/node-v0.12.0-linux-x64/webapps/webchat/node_modules/socket.io/lib/namespace.js:335:22)
+    at Manager.onClientMessage (/home/wuweida/node-v0.12.0-linux-x64/webapps/webchat/node_modules/socket.io/lib/manager.js:488:38)
+    at WebSocket.Transport.onMessage (/home/wuweida/node-v0.12.0-linux-x64/webapps/webchat/node_modules/socket.io/lib/transport.js:387:20)
+    at Parser.<anonymous> (/home/wuweida/node-v0.12.0-linux-x64/webapps/webchat/node_modules/socket.io/lib/transports/websocket/hybi-16.js:39:10)

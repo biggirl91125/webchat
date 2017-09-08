@@ -1,0 +1,75 @@
+Ext.define('Wechat.UI.Container.GridFramework',{
+	extend : 'Ext.Viewport',
+	alias	: 'widget.agentlist',
+	mixins :{
+		gc:"Wechat.Control.GridControl"
+	},
+	//mixins:['Wechat.Control.GridControl'],
+	border : false,
+	frame  : false,
+	//split  : true,
+	layout : 'border', //anchor //accordion //hbox
+			
+	//closable    : true,
+	collapsible : false,
+	//autoScroll  : false,
+	title: 'Hello',
+    //height: 200,
+    width: 1200,
+		
+	
+	items:[],
+	db:null,
+	constructor:function(config)
+	{
+		Ext.apply(this,config);
+		//this.db = config.db;  
+		var header=this.initHeaderPanel();
+		this.items.push(header);
+
+		var group = this.initGroupsPanel({db:this.db});
+		this.items.push(group);
+		
+		var modify=this.initModifyPanel({db:this.db});
+		this.items.push(modify);
+		this.callParent(arguments);
+	},
+
+	initHeaderPanel:function(config){
+		this.header=Ext.create('Wechat.UI.Header.Header');	
+		return this.header;
+	},
+	
+	initGroupsPanel:function(config){
+		var me=this;	
+		
+		this.groupstore = config.db.groupsGridStore;
+	  	this.groupsgridID = "#groupsgrid";
+	  	this.groupsgridItemID = "groupsgrid";
+		this.group = Ext.create('Wechat.UI.Grid.GroupsGridPanel');	
+		me.mixins.gc.constructor.call(me,this);    
+		return this.group;
+	},
+	
+	initModifyPanel:function(config)
+	{
+		var me =this;
+		//membersGridStore
+		this.dragstore=config.db.dragGridStore;
+		this.modifyItemID="modifypanel";
+		this.draggridID="#draggrid";
+		this.draggridItemID="draggrid";
+
+		this.memberstore=config.db.membersGridStore;
+		this.membersgridID="#MembersGrid";
+		this.membersgridItemID="MembersGrid";
+		
+		//this.teamsstore=config.db.teamsStore;
+		this.modify = Ext.create('Wechat.UI.Modify.ModifyPanel');
+		me.mixins.gc.initDragStore.call(me,this);
+		
+		
+		return this.modify;
+	}
+
+})

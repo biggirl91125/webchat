@@ -1,0 +1,21 @@
+
+#plugin_qq_box 
+{
+	width:200px; 
+	height:197px;
+	margin:25px 10px;
+	position:fixed; 
+	right:50px;
+	background:url('images/kefu.png') no-repeat;
+	//background-size:cover;
+}
+#inner_box 
+{
+	width:92px; 
+	height:100px; 
+	position:relative; 
+	overflow:hidden; 
+	margin:25px 20px;
+	font-size:1px;
+}
+

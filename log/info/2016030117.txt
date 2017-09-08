@@ -1,0 +1,4 @@
+[2016-03-01 17:32:42.973] [DEBUG] logInfo - GET /javascripts/extjs/resources/css/ext-all.css
+[2016-03-01 17:32:43.108] [DEBUG] logInfo - GET /javascripts/extjs/resources/ext-theme-classic/ext-theme-classic-all.css
+[2016-03-01 17:32:43.294] [DEBUG] logInfo - GET /stylesheets/msg.css
+[2016-03-01 17:32:43.430] [DEBUG] logInfo - GET /stylesheets/lrtk.css

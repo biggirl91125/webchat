@@ -1,0 +1,54 @@
+[2016-03-02 15:01:31.523] [ERROR] logErr - { [Error: ER_NO_DEFAULT_FOR_FIELD: Field 'groupType' doesn't have a default value]
+  code: 'ER_NO_DEFAULT_FOR_FIELD',
+  errno: 1364,
+  sqlState: 'HY000',
+  index: 0 }
+Error: ER_NO_DEFAULT_FOR_FIELD: Field 'groupType' doesn't have a default value
+    at Query.Sequence._packetToError (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\sequences\Sequence.js:30:14)
+    at Query.ErrorPacket (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\sequences\Query.js:82:18)
+    at Protocol._parsePacket (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\Protocol.js:205:24)
+    at Parser.write (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\Parser.js:62:12)
+    at Protocol.write (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\Protocol.js:37:16)
+    at Socket.<anonymous> (D:\nodejs\webchat_common\node_modules\mysql\lib\Connection.js:73:28)
+    at Socket.emit (events.js:107:17)
+    at readableAddChunk (_stream_readable.js:163:16)
+    at Socket.Readable.push (_stream_readable.js:126:10)
+    at TCP.onread (net.js:529:20)
+    --------------------
+    at Protocol._enqueue (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\Protocol.js:110:48)
+    at Connection.query (D:\nodejs\webchat_common\node_modules\mysql\lib\Connection.js:166:25)
+    at groupMessage.save (D:\nodejs\webchat_common\models\groupmessages.js:15:13)
+    at Function.groupMessageHandler (D:\nodejs\webchat_common\models\listenHandler.js:329:15)
+    at Socket.<anonymous> (D:\nodejs\webchat_common\app.js:96:17)
+    at Socket.emit [as $emit] (events.js:107:17)
+    at SocketNamespace.handlePacket (D:\nodejs\webchat_common\node_modules\socket.io\lib\namespace.js:335:22)
+    at Manager.onClientMessage (D:\nodejs\webchat_common\node_modules\socket.io\lib\manager.js:488:38)
+    at WebSocket.Transport.onMessage (D:\nodejs\webchat_common\node_modules\socket.io\lib\transport.js:387:20)
+    at Parser.<anonymous> (D:\nodejs\webchat_common\node_modules\socket.io\lib\transports\websocket\hybi-16.js:39:10)
+[2016-03-02 15:01:39.969] [ERROR] logErr - { [Error: ER_NO_DEFAULT_FOR_FIELD: Field 'groupType' doesn't have a default value]
+  code: 'ER_NO_DEFAULT_FOR_FIELD',
+  errno: 1364,
+  sqlState: 'HY000',
+  index: 0 }
+Error: ER_NO_DEFAULT_FOR_FIELD: Field 'groupType' doesn't have a default value
+    at Query.Sequence._packetToError (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\sequences\Sequence.js:30:14)
+    at Query.ErrorPacket (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\sequences\Query.js:82:18)
+    at Protocol._parsePacket (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\Protocol.js:205:24)
+    at Parser.write (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\Parser.js:62:12)
+    at Protocol.write (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\Protocol.js:37:16)
+    at Socket.<anonymous> (D:\nodejs\webchat_common\node_modules\mysql\lib\Connection.js:73:28)
+    at Socket.emit (events.js:107:17)
+    at readableAddChunk (_stream_readable.js:163:16)
+    at Socket.Readable.push (_stream_readable.js:126:10)
+    at TCP.onread (net.js:529:20)
+    --------------------
+    at Protocol._enqueue (D:\nodejs\webchat_common\node_modules\mysql\lib\protocol\Protocol.js:110:48)
+    at Connection.query (D:\nodejs\webchat_common\node_modules\mysql\lib\Connection.js:166:25)
+    at groupMessage.save (D:\nodejs\webchat_common\models\groupmessages.js:15:13)
+    at Function.groupMessageHandler (D:\nodejs\webchat_common\models\listenHandler.js:329:15)
+    at Socket.<anonymous> (D:\nodejs\webchat_common\app.js:96:17)
+    at Socket.emit [as $emit] (events.js:107:17)
+    at SocketNamespace.handlePacket (D:\nodejs\webchat_common\node_modules\socket.io\lib\namespace.js:335:22)
+    at Manager.onClientMessage (D:\nodejs\webchat_common\node_modules\socket.io\lib\manager.js:488:38)
+    at WebSocket.Transport.onMessage (D:\nodejs\webchat_common\node_modules\socket.io\lib\transport.js:387:20)
+    at Parser.<anonymous> (D:\nodejs\webchat_common\node_modules\socket.io\lib\transports\websocket\hybi-16.js:39:10)

@@ -1,0 +1,143 @@
+Ext.define('Wechat.UI.Grid.GroupsGridPanel',{
+	extend  : 'Ext.grid.Panel',
+	alias   :'widget.groupsgrid',	
+	itemId	:'groupsgrid',
+		
+	//width  : 1200,
+	frame  : false,				
+	region : 'center',	
+	//collapsible:true,	
+
+	/*constructor:function(config){
+		Ext.apply(this, config);
+
+		this.callParent(arguments);
+	}*/
+	store: null,
+	
+	columns:[
+				/*{
+					header:'', 
+					xtype:'templatecolumn',
+					width     : '5%',
+				},*/
+				{
+					header    : '企业号',
+					align  : 'center',
+					dataIndex : 'corpId',
+					width     : '10%',
+					/*renderer:function(value, cellMeta, record, rowIndex, columnIndex, store) 
+					{                  
+						var agtId= record.data['agtId'];      
+						return agtId.substring(12,agtId.length);
+					} */ 
+				},
+				{
+					header    : '组名',
+					align  : 'center',
+					dataIndex : 'groupName',
+					width     : '15%',
+				},
+				{
+					header    : '类型',
+					align  : 'center',
+					dataIndex : 'groupType',
+					width     : '10%',
+					renderer:function(value, cellMeta, record, rowIndex, columnIndex, store) 
+					{
+						var type= record.data['groupType'];  
+						var result='';
+						switch(type)
+						{
+							case '0' :
+								result='普通组';
+								break;
+							case '1' :
+								result='公告组';
+								break;
+						}	
+						return result;
+					} 
+				},
+				{
+					header    : '管理员',
+					align  : 'center',
+					dataIndex : 'chairMen',
+					width     : '15%',
+					renderer:function(value, cellMeta, record, rowIndex, columnIndex, store) 
+					{
+						var chairMen= record.data['chairMen'];  
+						var result=chairMen.split(",");
+						var chair=[];
+						for(i in result)
+						{
+							chair.push(result[i].substr(12));
+						}
+						return chair.join(",");
+					} 
+				},
+				{
+					header    : '成员',
+					align  : 'center',
+					dataIndex : 'Members',
+					width     : '30%',
+					renderer:function(value, cellMeta, record, rowIndex, columnIndex, store) 
+					{
+						var Members= record.data['Members'];  
+						var result=Members.split(",");
+						var mem=[];
+						for(i in result)
+						{
+							mem.push(result[i].substr(12));
+						}
+						return mem.join(",");
+					} 
+				},
+				{
+					header : '修改',
+					align  : 'center',
+					xtype  : 'actioncolumn',
+					
+					itemId : 'modify',
+					
+					width:'10%',
+					items  : [{
+						iconCls : 'modify_node',
+						tooltip : '修改'	
+					}]
+				},
+				{
+					header : '删除',
+					align  : 'center',
+					xtype  : 'actioncolumn',
+					
+					itemId : 'onedelete',
+					
+					width     : '10%',
+					items  : [{
+							iconCls : 'delete_node',
+							tooltip : '删除'
+						}]	
+				}
+			],	
+			
+		tbar    : [
+			{
+				xtype   : 'button',
+				iconCls : 'add_node',
+				text    : '注册新群组',	
+					
+				itemId  : 'registergroup'	
+			},
+				'-',
+			{
+				xtype   : 'button',
+				iconCls : 'delete_node',
+				text    : '批量删除',	
+				itemId	:'batchdelete'					
+				}
+		],
+	
+	selType:'checkboxmodel',
+	multiSelect:true,
+})

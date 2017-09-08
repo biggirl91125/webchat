@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	    <title> Node.js性能测试</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">		 
+		<script type='text/javascript' src='/javascripts/extjs/ext-all.js'></script>
+		<script type='text/javascript' src='/socket.io/socket.io.js'></script>
+		<script type='text/javascript' src='/javascripts/logic.js'></script>
+		<script type='text/javascript' src='/javascripts/view.js'></script>
+		<script type='text/javascript' src='/javascripts/msgstore.js'></script>
+		<script type='text/javascript' src='/javascripts/session.js'></script>		 
+</head>
+<body>
+ <table>
+<form name="login">
+<tr><td>工号：<input type="text" id="empId"></td></tr> 
+<tr><td>密码：<input type="password" id="password" value='111111'></center></tr> 
+<tr><td>企业名：<input type="text" id="corpId" value='900000'></center></tr>
+<tr><td>
+<label><input type="radio" name="roleKey" id="roleKey" value="ROLE_CC_AGENT" checked="true">坐席</label> 
+<label><input type="radio" name="roleKey" id="roleKey" value="ROLE_CRM_CHECKER">质检</label> 
+<label><input type="radio" name="roleKey" id="roleKey" value="ROLE_CRM_MONITOR">班长</label> 
+<label><input type="radio" name="roleKey" id="roleKey" value="ROLE_CRM_CORP_MANAGE_ADMIN">企业管理员</label>
+<label><input type="radio" name="roleKey" id="roleKey" value="ROLE_CRM_DEPT_ADMIN">部门管理员</label>
+</td></tr>
+</form>
+</table> 
+<table>
+<tr><td><button type="button" id="login">Login</button></td></tr>
+<tr><td><button type="button" id="open">打开窗口</button></td></tr> 
+<tr><td><button type="button" id="close">关闭窗口</button></td></tr>
+<tr><td><button type="button" id="open_gro">打开群组窗口</button></td></tr> 
+<tr><td><button type="button" id="close_gro">关闭群组窗口</button></td></tr>
+<tr><td><button type="button" id="sendMsg">私信</button></td></tr>
+<tr><td><button type="button" id="sendGMsg">群聊</button></td></tr>
+<tr><td><button type="button" id="end"> End</button></td></tr>
+</table>
+</body>
+</html>
+<script>
+Ext.onReady(function(){ 
+	
+	document.getElementById('login').onclick=login;
+	document.getElementById('open').onclick=winOpen;
+	document.getElementById('close').onclick=winClose;
+	document.getElementById('open_gro').onclick=winOpen_gro;
+	document.getElementById('close_gro').onclick=winClose_gro;
+	document.getElementById('sendMsg').onclick=sendM;
+	document.getElementById('sendGMsg').onclick=sendGM;
+	document.getElementById('end').onclick=end;
+	
+	//初始化消息队列
+	var msg=new Ext.util.Observable(); 
+	//初始化视图
+	var view=new View(msg);
+	
+	
+	var empId;
+	function login(){
+		empId=document.login.empId.value;
+		var corpId=document.login.corpId.value;
+		var password=document.login.password.value;
+		var roleKey;
+		var obj=document.login.roleKey;
+		for(var i=0;i<obj.length;i++)
+		{
+			if(obj[i].checked)
+				roleKey=obj[i].value;
+		}
+		var empid='000010'+corpId+empId;
+		var se=new session(msg);
+		var store=new MsgStore(msg,empid);
+		var logic=new Logic(msg,corpId,roleKey,empid,password);
+		msg.fireEvent('login');
+	}
+	function winOpen(){
+		if(empId=='2001'){
+			var id1='0000109000003005';
+			var id2='0000109000003009';
+			msg.fireEvent('winOpen',id1);
+			msg.fireEvent('winOpen',id2);
+			
+		}
+		else{
+			var id='0000109000002001';
+			msg.fireEvent('winOpen',id);
+		}
+	}
+	function winClose(){
+		if(empId=='2001'){
+			var id1='0000109000003005';
+			msg.fireEvent('winClose',id1);
+			var id2='0000109000003009';
+			msg.fireEvent('winClose',id2);
+		}
+		else{
+			var id='0000109000002001';
+			msg.fireEvent('winClose',id);
+		}
+	}
+	
+	function winOpen_gro(){
+		var id='Damon';
+		msg.fireEvent('winOpen',id);
+	}
+	function winClose_gro(){
+		var id='Damon';
+		msg.fireEvent('winClose',id);
+	}
+	
+	var res1;
+	var res2;
+	var count1=0;
+	var count2=0;
+	var count3=0;
+	var count4=0;
+	function sendM(){
+		//var id1='0000109000003005';
+		//msg.fireEvent('winOpen',id1);
+		//var id2='0000109000003009';
+		//msg.fireEvent('winOpen',id2);
+		res1=setInterval(send,1000);
+	}
+	function sendGM(){
+		//var id='Damon';
+		//msg.fireEvent('winOpen',id);
+		res2=setInterval(sendG,1000);
+	}
+	function end(){
+		clearInterval(res1);
+		clearInterval(res2);
+	}
+	function send(){
+		/*
+		if(empId=='2001'){
+			var send='2001';
+			var cont1="轻轻的我走了，正如我轻轻地来";
+			var rece1='0000109000003005';
+			var name1='3005';
+			var cont2="我挥一挥衣袖不带走一片云彩";
+			var rece2='0000109000003009';
+			var name2='3009';
+			msg.fireEvent('sendMsg',send,rece1,name1,cont1);
+			msg.fireEvent('sendMsg',send,rece2,name2,cont2);
+		}
+		else{
+			var cont="您的水果正duang duang的朝你飞奔而来";
+			var send='3005';
+			var rece='0000109000002001';
+			var name='2001';
+			msg.fireEvent('sendMsg',send,rece,name,cont);
+		}
+		*/
+		if(empId=='2001'){
+			
+			count1++;
+			var send='2001';
+			var cont1='2001&3005_'+count1;
+			var rece1='0000109000003005';
+			var name1='3005';
+			var cont2='2001&3009_'+count1;
+			var rece2='0000109000003009';
+			var name2='3009';
+			msg.fireEvent('sendMsg',send,rece1,name1,cont1);
+			msg.fireEvent('sendMsg',send,rece2,name2,cont2);
+		}
+		else{
+			count2++;
+			var cont='3005&2001_'+count2;
+			var send='3005';
+			var rece='0000109000002001';
+			var name='2001';
+			msg.fireEvent('sendMsg',send,rece,name,cont);
+		}
+	}
+	function sendG(){
+	/*
+		if(empId=='2001'){
+			var send_name='2001',
+				gro='Damon',
+				type='0',
+				cont="Let us go camping",
+				ti='2015-3-24',
+				admin='3005';
+			msg.fireEvent('sendGroupMsg',send_name,gro,type,cont,ti,admin);
+		}
+		else{
+			var send_name='3005',
+				gro='Damon',
+				type='0',
+				cont="Let us go camping",
+				ti='2015-3-24',
+				admin='3005';
+			msg.fireEvent('sendGroupMsg',send_name,gro,type,cont,ti,admin);
+		}
+	*/
+		if(empId=='2001'){
+			count3++;
+			var send_name='2001',
+				gro='Damon',
+				type='0',
+				cont='2001&Damon_'+count3,
+				ti='2015-3-24',
+				admin='3005';
+			msg.fireEvent('sendGroupMsg',send_name,gro,type,cont,ti,admin);
+		}
+		else{
+			count4++;
+			var send_name='3005',
+				gro='Damon',
+				type='0',
+				cont='3005&Damon_'+count4,
+				ti='2015-3-24',
+				admin='3005';
+			msg.fireEvent('sendGroupMsg',send_name,gro,type,cont,ti,admin);
+		}
+	}
+	function unread(){
+		msg.fireEvent('unreadMsg');
+	}
+	
+	
+	
+});
+</script>

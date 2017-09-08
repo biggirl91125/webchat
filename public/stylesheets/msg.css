@@ -1,0 +1,56 @@
+div .container {
+	width:380px;
+}
+
+.right{
+	_height:50px; 
+	_width:200px;
+	min-height:50px;
+	min-width:200px;
+	max-width:200px;
+	border:1px solid #DCDCDC;
+	border-radius: 5px 6px 7px 8px;
+	float:right;
+	background:#F0FFFF;
+	word-break:break-all;     
+	overflow:hidden; 
+	position:relative;
+	clear:left;
+	margin:5px;/*иосробвС*/
+}
+.left{
+	_height:50px; 
+	_width:200px;
+	min-height:50px;
+	min-width:200px;
+	max-width:200px;
+	border:1px solid #DCDCDC;
+	border-radius: 5px 6px 7px 8px;
+	background:#F0FFFF;
+	word-break:break-all;     
+	overflow:hidden; 
+	clear:right;
+	margin:5px;
+}
+
+.delete_node {
+	background-image: url(http://127.0.0.1:3001/images/deletenode.png) ;
+	background-repeat: no-repeat;   
+	background-position: center; 
+}
+
+.personiconCls{
+	background-image:url(http://127.0.0.1:3001/images/p.png);
+}
+
+.groupiconCls{
+	background-image:url(http://127.0.0.1:3001/images/gr.png);
+}
+
+.x-grid-tree-node-expanded .personiconCls{
+	background-image:url(http://127.0.0.1:3001/images/p.png);
+}
+
+.x-grid-tree-node-expanded .groupiconCls{
+	background-image:url(http://127.0.0.1:3001/images/gr.png);
+}

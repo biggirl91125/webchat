@@ -1,0 +1,6 @@
+Ext.define('Corp',{
+	senderInfo :{},
+});
+
+var Corp=Ext.create('Corp');
+

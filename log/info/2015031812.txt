@@ -1,0 +1,11 @@
+[2015-03-18 12:00:02.267] [DEBUG] logInfo - GET /javascripts/extjs/resources/ext-theme-classic/images/sizer/sw-handle.gif
+[2015-03-18 12:00:02.273] [DEBUG] logInfo - GET /javascripts/extjs/resources/ext-theme-classic/images/sizer/nw-handle.gif
+[2015-03-18 12:00:02.274] [DEBUG] logInfo - GET /javascripts/extjs/resources/ext-theme-classic/images/sizer/se-handle.gif
+[2015-03-18 12:00:02.276] [DEBUG] logInfo - GET /javascripts/extjs/resources/ext-theme-classic/images/sizer/ne-handle.gif
+[2015-03-18 12:00:02.277] [DEBUG] logInfo - GET /javascripts/extjs/resources/ext-theme-classic/images/sizer/e-handle.gif
+[2015-03-18 12:00:02.279] [DEBUG] logInfo - GET /javascripts/extjs/resources/ext-theme-classic/images/sizer/s-handle.gif
+[2015-03-18 12:00:03.223] [DEBUG] logInfo - GET /javascripts/extjs/resources/ext-theme-classic/images/grid/invalid_line.gif
+[2015-03-18 12:00:14.521] [DEBUG] logInfo - GET /javascripts/extjs/resources/ext-theme-classic/images/grid/grid3-hd-btn.gif
+[2015-03-18 12:00:14.522] [DEBUG] logInfo - GET /javascripts/extjs/resources/ext-theme-classic/images/tab-bar/default-scroll-left-bottom.gif
+[2015-03-18 12:00:14.528] [DEBUG] logInfo - GET /javascripts/extjs/resources/ext-theme-classic/images/tab-bar/default-scroll-right-bottom.gif
+[2015-03-18 12:00:17.428] [DEBUG] logInfo - GET /javascripts/extjs/resources/ext-theme-classic/images/grid/dirty.gif
